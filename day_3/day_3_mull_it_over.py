@@ -18,7 +18,7 @@ def attempt_to_execute_mul_program_version_do_donts(memory):
 
     In my view, the text "Only the most recent do() or don't() instruction applies." implies that
     the solution to the following is 35, since after hitting the 'do()' block just before mul(1,7)
-    we should only 
+    we should only capture backwards until the 'most recent' do() block.
     >>> attempt_to_execute_mul_program_version_do_donts(r"don't()mul(1,3)don't()mul(1,5)do()mul(1,7)do()")
     7
     """
