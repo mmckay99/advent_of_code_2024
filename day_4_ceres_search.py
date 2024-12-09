@@ -2,16 +2,16 @@ import aocd # type: ignore
 import itertools
 
 test_wordsearch_data_string = """
-MMMSXXMASM
-MSAMXMSMSA
-AMXSXMAAMM
-MSAMASMSMX
-XMASAMXAMM
-XXAMMXXAMA
-SMSMSASXSS
-SAXAMASAAA
-MAMMMXMMMM
-MXMXAXMASX
+.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+abcdefghij
 """
 
 def parse_wordsearch_string(wordsearch_data_string):
@@ -22,6 +22,16 @@ def count_cross_mas_occurrences(wordsearch_data):
     table_height = len(wordsearch_data)
 
     found_occurrences = 0
+
+    for i, j in itertools.product(range(1, table_height - 1), range(1, table_width - 1)):
+        left_diagonal = wordsearch_data[i - 1][j - 1] + wordsearch_data[i][j] + wordsearch_data[i + 1][j + 1]
+        right_diagonal = wordsearch_data[i - 1][j + 1] + wordsearch_data[i][j] + wordsearch_data[i + 1][j - 1]
+
+        if (left_diagonal in ["MAS", "SAM"]) and (right_diagonal in ["MAS", "SAM"]):
+            found_occurrences += 1
+
+    return found_occurrences
+
 
 def count_xmas_word_occurrences(wordsearch_data):
     table_width = len(wordsearch_data[0])
@@ -49,5 +59,5 @@ def count_xmas_word_occurrences(wordsearch_data):
 
 if __name__ == "__main__":
     actual_wordsearch_data_string = aocd.get_data(day=4, year=2024)
-    xmas_word_occurrences = count_xmas_word_occurrences(parse_wordsearch_string(actual_wordsearch_data_string))
+    xmas_word_occurrences = count_cross_mas_occurrences(parse_wordsearch_string(actual_wordsearch_data_string))
     print(xmas_word_occurrences)
