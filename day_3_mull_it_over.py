@@ -30,7 +30,6 @@ def attempt_to_execute_mul_program_version_do_donts(memory):
     inside_dont_do_block = False
 
     for (mul_number_1, mul_number_2, do_token, dont_token) in re.findall(regex_either_valid_mul_do_or_dont, memory):
-        # print((mul_number_1, mul_number_2, do_token, dont_token))
         if mul_number_1 and not inside_dont_do_block:
             total_so_far += int(mul_number_1) * int(mul_number_2)
         elif dont_token:
