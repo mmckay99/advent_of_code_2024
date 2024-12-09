@@ -18,8 +18,8 @@ testFileContents = "3 4\n 4 3\n 2 5\n 1 3\n 3 9\n 3 3\n"
 parseRawFileString :: String -> ([Int], [Int])
 parseRawFileString rawFileString = (evenIndexedLocationIntegers, oddIndexedLocationIntegers)
     where
-        evenIndexedLocationIntegers = map snd $ filter (even . fst) $ indexedLocationIntegers
-        oddIndexedLocationIntegers = map snd $ filter (odd . fst) $ indexedLocationIntegers
+        evenIndexedLocationIntegers = map snd $ filter (even . fst) indexedLocationIntegers
+        oddIndexedLocationIntegers = map snd $ filter (odd . fst) indexedLocationIntegers
         indexedLocationIntegers = zip [0..] $ map (read :: String -> Int) $ words rawFileString
 
 sumOfAbsolutePairwiseDifferences :: ([Int], [Int]) -> Int
